@@ -24,16 +24,14 @@ ShaderProgram::ShaderProgram(const char* vertexPath, const char* fragmentPath)
 
 unsigned int ShaderProgram::createShader(const char* path, GLenum shaderType) const
 {
-	const char* code;
+	std::stringstream stream;
+	std::ifstream shaderFile;
 
 	try
 	{
-		std::ifstream shaderFile;
 		shaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 		shaderFile.open(path);
-		std::stringstream stream;
 		stream << shaderFile.rdbuf();
-		code = stream.str().c_str();
 		shaderFile.close();
 	}
 	catch(std::ifstream::failure e)
@@ -42,6 +40,8 @@ unsigned int ShaderProgram::createShader(const char* path, GLenum shaderType) co
 		throw std::runtime_error("ERROR: could not read shader");
 	}
 
+	std::string stringCode = stream.str();
+	const char* code = stringCode.c_str();
 	unsigned int shader = glCreateShader(shaderType);
 	glShaderSource(shader, 1, &code, NULL);
 	glCompileShader(shader);
