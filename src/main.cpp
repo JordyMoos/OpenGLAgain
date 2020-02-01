@@ -44,14 +44,22 @@ int run()
 	// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
-	ShaderProgram shaderProgram = ShaderProgram("./shaders/vertex.vert", "./shaders/fragment.frag");
+	ShaderProgram shaderProgram = ShaderProgram("./src/shaders/vertex.vert", "./src/shaders/fragment.frag");
 	
 	// setup vertices
+	/*
 	float vertices[] = {
 		// positions			// colors			// texture
 		 0.5f, -0.5f, 0.0f,		1.0f, 0.0f, 0.0f,	1.0f, 0.0f,	// bottom right
 		-0.5f, -0.5f, 0.0f,		0.0f, 1.0f, 0.0f,	0.0f, 0.0f,	// bottom left
 		 0.0f,  0.5f, 0.0f,		0.0f, 0.0f, 1.0f,	0.5f, 1.0f	// top
+	};
+	*/
+	float vertices[] = {
+		// positions			// colors			// texture
+		 0.5f, -0.5f, 0.0f,		1.0f, 0.0f, 0.0f,	
+		-0.5f, -0.5f, 0.0f,		0.0f, 1.0f, 0.0f,
+		 0.0f,  0.5f, 0.0f,		0.0f, 0.0f, 1.0f
 	};
 	unsigned int indices[] = {
 		0, 1, 2, // first triangle

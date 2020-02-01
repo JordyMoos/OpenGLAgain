@@ -141,16 +141,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="glad.c" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="includes\glad.c" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\ShaderProgram.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ShaderProgram.h" />
+    <ClInclude Include="src\ShaderProgram.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="shaders\fragment.frag" />
-    <None Include="shaders\vertex.vert" />
+    <None Include="src\shaders\fragment.frag" />
+    <None Include="src\shaders\vertex.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\image\wall.jpg" />
