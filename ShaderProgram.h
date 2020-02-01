@@ -18,22 +18,22 @@ public:
 	}
 
 	// uniform functions
-	void set1b(const std::string& name, bool b1) const
+	void set1b(const std::string& name, bool b1)
 	{
 		glUniform1i(glGetUniformLocation(id, name.c_str()), (int)b1);
 	}
 
-	void set1i(const std::string& name, int i1) const
+	void set1i(const std::string& name, int i1)
 	{
 		glUniform1i(glGetUniformLocation(id, name.c_str()), i1);
 	}
 
-	void set1f(const std::string& name, float f1) const
+	void set1f(const std::string& name, float f1)
 	{
 		glUniform1f(glGetUniformLocation(id, name.c_str()), f1);
 	}
 
-	void set4f(const std::string& name, float f1, float f2, float f3, float f4) const
+	void set4f(const std::string& name, float f1, float f2, float f3, float f4)
 	{
 		glUniform4f(glGetUniformLocation(id, name.c_str()), f1, f2, f3, f4);
 	}

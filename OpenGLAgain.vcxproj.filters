@@ -16,6 +16,9 @@
     <Filter Include="shaders">
       <UniqueIdentifier>{841ed827-1521-4206-92af-a16c631927c1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\image">
+      <UniqueIdentifier>{511826e3-fd59-40ff-8d2f-3f3283ff45a7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -40,5 +43,10 @@
     <None Include="shaders\fragment.frag">
       <Filter>shaders</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\image\wall.jpg">
+      <Filter>Resource Files\image</Filter>
+    </Image>
   </ItemGroup>
 </Project>
