@@ -142,10 +142,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="includes\glad.c" />
-    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="src\ShaderProgram.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="includes\stb_image.h" />
     <ClInclude Include="src\ShaderProgram.h" />
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +154,7 @@
     <None Include="src\shaders\vertex.vert" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="assets\image\container.jpg" />
     <Image Include="assets\image\wall.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
