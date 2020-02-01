@@ -144,16 +144,19 @@
     <ClCompile Include="includes\glad.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\ShaderProgram.cpp" />
+    <ClCompile Include="src\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\stb_image.h" />
     <ClInclude Include="src\ShaderProgram.h" />
+    <ClInclude Include="src\Texture.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\shaders\fragment.frag" />
     <None Include="src\shaders\vertex.vert" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="assets\image\awesomeface.png" />
     <Image Include="assets\image\container.jpg" />
     <Image Include="assets\image\wall.jpg" />
   </ItemGroup>

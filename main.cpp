@@ -6,6 +6,7 @@
 #include "includes/stb_image.h"
 
 #include "src/ShaderProgram.h"
+#include "src/Texture.h"
 
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -45,30 +46,12 @@ int run()
 	glViewport(0, 0, 800, 600);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 	// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	stbi_set_flip_vertically_on_load(true);
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
 
-	// texture
-	unsigned int texture;
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	int width, height, nrChannels;
-	unsigned char* data = stbi_load("./assets/image/container.jpg", &width, &height, &nrChannels, 0);
-	if (!data)
-	{
-		std::cout << "Error: could not load texture ./assets/image/container.jpg" << std::endl;
-		throw new std::runtime_error("Error: Could not load texture");
-	}
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-	glGenerateMipmap(GL_TEXTURE_2D);
-	stbi_image_free(data);
-
-
+	Texture textureContainer = Texture("./assets/image/container.jpg", GL_RGB, GL_RGB);
+	Texture textureFace = Texture("./assets/image/awesomeface.png", GL_RGBA, GL_RGBA);
 	ShaderProgram shaderProgram = ShaderProgram("./src/shaders/vertex.vert", "./src/shaders/fragment.frag");
 	
 	// setup vertices
@@ -104,6 +87,10 @@ int run()
 	glEnableVertexAttribArray(2);
 	glBindVertexArray(0);
 
+	shaderProgram.use();
+	shaderProgram.set1i("aTexture1", 0);
+	shaderProgram.set1i("aTexture2", 1);
+
 	// main loop
 	while ( ! glfwWindowShouldClose(window))
 	{
@@ -117,7 +104,12 @@ int run()
 		shaderProgram.use();
 		shaderProgram.set4f("color", 0.0f, greenValue, 0.0f, 1.0f);
 
-		glBindTexture(GL_TEXTURE_2D, texture);
+		glActiveTexture(GL_TEXTURE0);
+		textureContainer.bind();
+
+		glActiveTexture(GL_TEXTURE1);
+		textureFace.bind();
+
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
