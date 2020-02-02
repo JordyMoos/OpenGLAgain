@@ -57,7 +57,8 @@ int run()
 	stbi_set_flip_vertically_on_load(true);
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
-	programOne(window);
+	// programOne(window);
+	programArc(window);
 
 	glfwTerminate();
 	return 0;
@@ -66,7 +67,6 @@ int run()
 
 void programArc(GLFWwindow* window)
 {
-	Texture textureContainer = Texture("./assets/image/container.jpg", GL_RGB, GL_RGB);
 	ShaderProgram shaderProgram = ShaderProgram(
 		"./src/shaders/arc.vert",
 		"./src/shaders/arc.frag",
@@ -75,8 +75,8 @@ void programArc(GLFWwindow* window)
 
 	// setup vertices
 	float vertices[] = {
-		// positions            // texture coords
-		 0.0f,  0.0f, 0.0f,		0.5f, 0.0f
+		// positions      
+		 0.0f,  0.8f, 0.0f
 	};
 
 	unsigned int VAO;
@@ -88,16 +88,14 @@ void programArc(GLFWwindow* window)
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 	// positions
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
-	// texture coordinates
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
-	glEnableVertexAttribArray(1);
 	glBindVertexArray(0);
 
 	shaderProgram.use();
-	shaderProgram.set1i("aTexture", 0);
-
+	shaderProgram.set1f("angle", 45.0f);
+	shaderProgram.set1f("size", 30.0f);
+	  
 	// main loop
 	while (!glfwWindowShouldClose(window))
 	{
@@ -106,15 +104,9 @@ void programArc(GLFWwindow* window)
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		shaderProgram.use();
-		glm::mat4 trans = glm::mat4(1.0f);
-		trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
-		shaderProgram.setMatrix4fv("transform", 1, GL_FALSE, glm::value_ptr(trans));
-
-		glActiveTexture(GL_TEXTURE0);
-		textureContainer.bind();
 
 		glBindVertexArray(VAO);
-		glDrawElements(GL_POINT, 1, GL_UNSIGNED_INT, 0);
+		glDrawArrays(GL_POINTS, 0, 1);
 		glBindVertexArray(0);
 
 		glfwSwapBuffers(window);
