@@ -21,6 +21,7 @@ ShaderProgram::ShaderProgram(const char* vertexPath, const char* fragmentPath, s
 
 	if (geometryPath.has_value())
 	{
+		unsigned int geometry = createShader(geometryPath.value(), GL_GEOMETRY_SHADER);
 		glAttachShader(id, geometry);
 		glDeleteShader(geometry);
 	}
