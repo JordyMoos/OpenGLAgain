@@ -37,6 +37,11 @@ public:
 		glUniform4f(glGetUniformLocation(id, name.c_str()), f1, f2, f3, f4);
 	}
 
+	void setMatrix4fv(const std::string& name, GLsizei count, GLboolean transpose, const GLfloat *value)
+	{
+		glUniformMatrix4fv(glGetUniformLocation(id, name.c_str()), count, transpose, value);
+	}
+
 protected:
 	unsigned int createShader(const char* path, GLenum shaderType) const;
 	void guardCompileErrors(const unsigned int shader) const;
