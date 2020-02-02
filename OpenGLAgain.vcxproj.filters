@@ -52,6 +52,15 @@
     <None Include="src\shaders\fragment.frag">
       <Filter>shaders</Filter>
     </None>
+    <None Include="src\shaders\arc.geom">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="src\shaders\arc.vert">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="src\shaders\arc.frag">
+      <Filter>shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\image\wall.jpg">

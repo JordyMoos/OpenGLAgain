@@ -13,6 +13,10 @@
 #include "src/Texture.h"
 
 
+void programOne(GLFWwindow* window);
+void programArc(GLFWwindow* window);
+
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
@@ -53,11 +57,81 @@ int run()
 	stbi_set_flip_vertically_on_load(true);
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
+	programOne(window);
 
+	glfwTerminate();
+	return 0;
+}
+
+
+void programArc(GLFWwindow* window)
+{
+	Texture textureContainer = Texture("./assets/image/container.jpg", GL_RGB, GL_RGB);
+	ShaderProgram shaderProgram = ShaderProgram(
+		"./src/shaders/arc.vert",
+		"./src/shaders/arc.frag",
+		"./src/shaders/arc.geom"
+	);
+
+	// setup vertices
+	float vertices[] = {
+		// positions            // texture coords
+		 0.0f,  0.0f, 0.0f,		0.5f, 0.0f
+	};
+
+	unsigned int VAO;
+	glGenVertexArrays(1, &VAO);
+	unsigned int VBO;
+	glGenBuffers(1, &VBO);
+
+	glBindVertexArray(VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	// positions
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	// texture coordinates
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+	glBindVertexArray(0);
+
+	shaderProgram.use();
+	shaderProgram.set1i("aTexture", 0);
+
+	// main loop
+	while (!glfwWindowShouldClose(window))
+	{
+		processInput(window);
+
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		shaderProgram.use();
+		glm::mat4 trans = glm::mat4(1.0f);
+		trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+		shaderProgram.setMatrix4fv("transform", 1, GL_FALSE, glm::value_ptr(trans));
+
+		glActiveTexture(GL_TEXTURE0);
+		textureContainer.bind();
+
+		glBindVertexArray(VAO);
+		glDrawElements(GL_POINT, 1, GL_UNSIGNED_INT, 0);
+		glBindVertexArray(0);
+
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+	}
+
+	glDeleteVertexArrays(1, &VAO);
+	glDeleteBuffers(1, &VBO);
+}
+
+
+void programOne(GLFWwindow* window)
+{
 	Texture textureContainer = Texture("./assets/image/container.jpg", GL_RGB, GL_RGB);
 	Texture textureFace = Texture("./assets/image/awesomeface.png", GL_RGBA, GL_RGBA);
 	ShaderProgram shaderProgram = ShaderProgram("./src/shaders/vertex.vert", "./src/shaders/fragment.frag");
-	
+
 	// setup vertices
 	float vertices[] = {
 		// positions            // texture coords
@@ -96,10 +170,10 @@ int run()
 	shaderProgram.set1i("aTexture2", 1);
 
 	// main loop
-	while ( ! glfwWindowShouldClose(window))
+	while (!glfwWindowShouldClose(window))
 	{
 		processInput(window);
-	
+
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		shaderProgram.use();
@@ -124,9 +198,6 @@ int run()
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
 	glDeleteBuffers(1, &EBO);
-
-	glfwTerminate();
-	return 0;
 }
 
 

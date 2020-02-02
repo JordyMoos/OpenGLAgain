@@ -2,6 +2,8 @@
 
 #include <glad/glad.h>
 #include <string>
+#include <optional>
+#include <optional>
 
 class ShaderProgram
 {
@@ -9,7 +11,7 @@ protected:
 	unsigned int id;
 
 public:
-	ShaderProgram(const char* vertexPath, const char* fragmentPath);
+	ShaderProgram(const char* vertexPath, const char* fragmentPath, std::optional<const char*> geometryPath = std::nullopt);
 
 	void use()
 	{

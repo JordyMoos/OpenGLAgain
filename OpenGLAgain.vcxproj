@@ -101,6 +101,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -151,6 +152,9 @@
     <ClInclude Include="src\Texture.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="src\shaders\arc.frag" />
+    <None Include="src\shaders\arc.geom" />
+    <None Include="src\shaders\arc.vert" />
     <None Include="src\shaders\fragment.frag" />
     <None Include="src\shaders\vertex.vert" />
   </ItemGroup>

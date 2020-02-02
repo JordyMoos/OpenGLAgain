@@ -4,21 +4,29 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <optional>
 
 
-ShaderProgram::ShaderProgram(const char* vertexPath, const char* fragmentPath)
+ShaderProgram::ShaderProgram(const char* vertexPath, const char* fragmentPath, std::optional<const char*> geometryPath)
 {
-	unsigned int vertex = createShader(vertexPath, GL_VERTEX_SHADER);
-	unsigned int fragment = createShader(fragmentPath, GL_FRAGMENT_SHADER);
-
 	id = glCreateProgram();
-	glAttachShader(id, vertex);
-	glAttachShader(id, fragment);
-	glLinkProgram(id);
 
-	guardLinkErrors();
+	unsigned int vertex = createShader(vertexPath, GL_VERTEX_SHADER);
+	glAttachShader(id, vertex);
 	glDeleteShader(vertex);
+
+	unsigned int fragment = createShader(fragmentPath, GL_FRAGMENT_SHADER);
+	glAttachShader(id, fragment);
 	glDeleteShader(fragment);
+
+	if (geometryPath.has_value())
+	{
+		glAttachShader(id, geometry);
+		glDeleteShader(geometry);
+	}
+
+	glLinkProgram(id);
+	guardLinkErrors();
 }
 
 
