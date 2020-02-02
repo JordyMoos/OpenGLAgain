@@ -93,7 +93,6 @@ void programArc(GLFWwindow* window)
 	glBindVertexArray(0);
 
 	shaderProgram.use();
-	shaderProgram.set1f("angle", 45.0f);
 	shaderProgram.set1f("size", 30.0f);
 	  
 	// main loop
@@ -104,9 +103,7 @@ void programArc(GLFWwindow* window)
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		shaderProgram.use();
-		glm::mat4 trans = glm::mat4(1.0f);
-		trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
-		shaderProgram.setMatrix4fv("transform", 1, GL_FALSE, glm::value_ptr(trans));
+		shaderProgram.set1f("angle", 30.0 * (float)glfwGetTime());
 
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_POINTS, 0, 1);
