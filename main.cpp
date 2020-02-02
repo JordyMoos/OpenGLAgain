@@ -57,7 +57,7 @@ int run()
 	stbi_set_flip_vertically_on_load(true);
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
-	// programOne(window);
+	//programOne(window);
 	programArc(window);
 
 	glfwTerminate();
@@ -104,6 +104,9 @@ void programArc(GLFWwindow* window)
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		shaderProgram.use();
+		glm::mat4 trans = glm::mat4(1.0f);
+		trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+		shaderProgram.setMatrix4fv("transform", 1, GL_FALSE, glm::value_ptr(trans));
 
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_POINTS, 0, 1);
