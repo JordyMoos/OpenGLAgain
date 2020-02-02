@@ -1,7 +1,7 @@
 #include "Texture.h"
 #include <iostream>
 
-#include "../includes/stb_image.h"
+#include "stb_image.h"
 
 Texture::Texture(const char* path, GLint internalFormat, GLenum format) : id(0), width(0), height(0), nrChannels(0)
 {

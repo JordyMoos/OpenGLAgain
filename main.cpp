@@ -3,7 +3,7 @@
 #include <iostream>
 
 #define STB_IMAGE_IMPLEMENTATION
-#include "includes/stb_image.h"
+#include "stb_image.h"
 
 #include "src/ShaderProgram.h"
 #include "src/Texture.h"
