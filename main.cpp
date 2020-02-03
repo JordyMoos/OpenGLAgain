@@ -67,7 +67,7 @@ int run()
 
 void programArc(GLFWwindow* window)
 {
-	Texture textureContainer = Texture("./assets/image/container.jpg", GL_RGB, GL_RGB);
+	Texture textureContainer = Texture("./assets/image/container.jpg");
 	ShaderProgram shaderProgram = ShaderProgram(
 		"./src/shaders/arc.vert",
 		"./src/shaders/arc.frag",
@@ -125,8 +125,8 @@ void programArc(GLFWwindow* window)
 
 void programOne(GLFWwindow* window)
 {
-	Texture textureContainer = Texture("./assets/image/container.jpg", GL_RGB, GL_RGB);
-	Texture textureFace = Texture("./assets/image/awesomeface.png", GL_RGBA, GL_RGBA);
+	Texture textureContainer = Texture("./assets/image/container.jpg");
+	Texture textureFace = Texture("./assets/image/awesomeface.png");
 	ShaderProgram shaderProgram = ShaderProgram("./src/shaders/vertex.vert", "./src/shaders/fragment.frag");
 
 	// setup vertices

@@ -1,18 +1,17 @@
 #pragma once
 
 #include <glad/glad.h>
+#include <string>
+#include <vector>
 
 class Texture
 {
 protected:
 	unsigned int id;
-	int width;
-	int height;
-	int nrChannels;
 
 public:
-	Texture(const char* path, GLint internalFormat, GLenum format);
-
+	Texture(const char* path);
+	Texture(std::vector<std::string> faces);
 
 	void bind()
 	{
@@ -24,4 +23,3 @@ public:
 		glTexParameteri(GL_TEXTURE_2D, pname, param);
 	}
 };
-
