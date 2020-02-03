@@ -18,6 +18,11 @@ public:
 		glBindTexture(GL_TEXTURE_2D, id);
 	}
 
+	void bindSkybox()
+	{
+		glBindTexture(GL_TEXTURE_CUBE_MAP, id);
+	}
+
 	void seti(GLenum pname, GLint param)
 	{
 		glTexParameteri(GL_TEXTURE_2D, pname, param);

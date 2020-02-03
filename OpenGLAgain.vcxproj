@@ -148,6 +148,7 @@
     <ClCompile Include="src\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\camera.h" />
     <ClInclude Include="src\ShaderProgram.h" />
     <ClInclude Include="src\Texture.h" />
   </ItemGroup>
@@ -156,6 +157,8 @@
     <None Include="src\shaders\arc.geom" />
     <None Include="src\shaders\arc.vert" />
     <None Include="src\shaders\fragment.frag" />
+    <None Include="src\shaders\skybox.frag" />
+    <None Include="src\shaders\skybox.vert" />
     <None Include="src\shaders\vertex.vert" />
   </ItemGroup>
   <ItemGroup>

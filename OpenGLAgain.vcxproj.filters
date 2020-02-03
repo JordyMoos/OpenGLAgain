@@ -44,6 +44,9 @@
     <ClInclude Include="src\Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\shaders\vertex.vert">
@@ -59,6 +62,12 @@
       <Filter>shaders</Filter>
     </None>
     <None Include="src\shaders\arc.frag">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="src\shaders\skybox.vert">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="src\shaders\skybox.frag">
       <Filter>shaders</Filter>
     </None>
   </ItemGroup>

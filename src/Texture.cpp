@@ -33,6 +33,13 @@ Texture::Texture(const char* path) : id(0)
 	stbi_image_free(data);
 }
 
+/*
+	Used to create cubemaps.
+
+	The order of the images are: +x, -x, +y, -y, +z, -z
+	That makes: Right, Left, Top, Bottom, Front, Back
+
+*/
 Texture::Texture(std::vector<std::string> faces) : id(0)
 {
 	glGenTextures(1, &id);

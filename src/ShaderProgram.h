@@ -5,6 +5,10 @@
 #include <optional>
 #include <optional>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 class ShaderProgram
 {
 protected:
@@ -42,6 +46,11 @@ public:
 	void setMatrix4fv(const std::string& name, GLsizei count, GLboolean transpose, const GLfloat *value)
 	{
 		glUniformMatrix4fv(glGetUniformLocation(id, name.c_str()), count, transpose, value);
+	}
+
+	void setMat4(const std::string& name, const glm::mat4& mat) const
+	{
+		glUniformMatrix4fv(glGetUniformLocation(id, name.c_str()), 1, GL_FALSE, &mat[0][0]);
 	}
 
 protected:
