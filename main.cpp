@@ -67,6 +67,7 @@ int run()
 
 void programArc(GLFWwindow* window)
 {
+	Texture textureContainer = Texture("./assets/image/container.jpg", GL_RGB, GL_RGB);
 	ShaderProgram shaderProgram = ShaderProgram(
 		"./src/shaders/arc.vert",
 		"./src/shaders/arc.frag",
@@ -93,6 +94,7 @@ void programArc(GLFWwindow* window)
 	glBindVertexArray(0);
 
 	shaderProgram.use();
+	shaderProgram.set1i("aTexture", 0);
 	shaderProgram.set1f("size", 30.0f);
 	  
 	// main loop
@@ -104,6 +106,9 @@ void programArc(GLFWwindow* window)
 
 		shaderProgram.use();
 		shaderProgram.set1f("angle", 30.0 * (float)glfwGetTime());
+
+		glActiveTexture(GL_TEXTURE0);
+		textureContainer.bind();
 
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_POINTS, 0, 1);
